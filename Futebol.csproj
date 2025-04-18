@@ -144,6 +144,10 @@
     <Compile Include="Migrations\202504180333031_AjustePartida.Designer.cs">
       <DependentUpon>202504180333031_AjustePartida.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202504181846197_BdAtualizacao.cs" />
+    <Compile Include="Migrations\202504181846197_BdAtualizacao.Designer.cs">
+      <DependentUpon>202504181846197_BdAtualizacao.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ClassificacaoTime.cs" />
     <Compile Include="Models\ClassificacaoViewModel.cs" />
@@ -271,6 +275,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202504180333031_AjustePartida.resx">
       <DependentUpon>202504180333031_AjustePartida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504181846197_BdAtualizacao.resx">
+      <DependentUpon>202504181846197_BdAtualizacao.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
