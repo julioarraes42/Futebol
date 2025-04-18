@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class AjustePartida : DbMigration
     {
         public override void Up()
         {
@@ -18,7 +18,7 @@
                         TimeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Times", t => t.TimeId, cascadeDelete: true)
+                .ForeignKey("dbo.Times", t => t.TimeId)
                 .Index(t => t.TimeId);
             
             CreateTable(
@@ -54,7 +54,7 @@
                         TimeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Times", t => t.TimeId, cascadeDelete: true)
+                .ForeignKey("dbo.Times", t => t.TimeId)
                 .Index(t => t.TimeId);
             
             CreateTable(
@@ -67,8 +67,8 @@
                         Gols = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Jogadors", t => t.JogadorId, cascadeDelete: true)
-                .ForeignKey("dbo.Partidas", t => t.PartidaId, cascadeDelete: true)
+                .ForeignKey("dbo.Jogadors", t => t.JogadorId)
+                .ForeignKey("dbo.Partidas", t => t.PartidaId)
                 .Index(t => t.JogadorId)
                 .Index(t => t.PartidaId);
             
@@ -85,8 +85,8 @@
                         GolsFora = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Times", t => t.TimeCasaId, cascadeDelete: true)
-                .ForeignKey("dbo.Times", t => t.TimeForaId, cascadeDelete: true)
+                .ForeignKey("dbo.Times", t => t.TimeCasaId)
+                .ForeignKey("dbo.Times", t => t.TimeForaId)
                 .Index(t => t.TimeCasaId)
                 .Index(t => t.TimeForaId);
             

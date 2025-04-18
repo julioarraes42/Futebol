@@ -140,9 +140,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202504180259488_Initial.cs" />
-    <Compile Include="Migrations\202504180259488_Initial.Designer.cs">
-      <DependentUpon>202504180259488_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202504180333031_AjustePartida.cs" />
+    <Compile Include="Migrations\202504180333031_AjustePartida.Designer.cs">
+      <DependentUpon>202504180333031_AjustePartida.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ComissaoTecnica.cs" />
@@ -205,14 +205,34 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Jogadores\Index.cshtml" />
+    <Content Include="Views\Jogadores\Details.cshtml" />
+    <Content Include="Views\Jogadores\Create.cshtml" />
+    <Content Include="Views\Jogadores\Edit.cshtml" />
+    <Content Include="Views\Jogadores\Delete.cshtml" />
+    <Content Include="Views\Times\Index.cshtml" />
+    <Content Include="Views\Times\Details.cshtml" />
+    <Content Include="Views\Times\Create.cshtml" />
+    <Content Include="Views\Times\Edit.cshtml" />
+    <Content Include="Views\Times\Delete.cshtml" />
+    <Content Include="Views\ComissaoTecnica\Index.cshtml" />
+    <Content Include="Views\ComissaoTecnica\Details.cshtml" />
+    <Content Include="Views\ComissaoTecnica\Create.cshtml" />
+    <Content Include="Views\ComissaoTecnica\Edit.cshtml" />
+    <Content Include="Views\ComissaoTecnica\Delete.cshtml" />
+    <Content Include="Views\Partidas\Index.cshtml" />
+    <Content Include="Views\Partidas\Details.cshtml" />
+    <Content Include="Views\Partidas\Create.cshtml" />
+    <Content Include="Views\Partidas\Edit.cshtml" />
+    <Content Include="Views\Partidas\Delete.cshtml" />
+    <Content Include="Views\Estatisticas\Index.cshtml" />
+    <Content Include="Views\Estatisticas\Details.cshtml" />
+    <Content Include="Views\Estatisticas\Create.cshtml" />
+    <Content Include="Views\Estatisticas\Edit.cshtml" />
+    <Content Include="Views\Estatisticas\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
-    <Folder Include="Views\ComissaoTecnica\" />
-    <Folder Include="Views\Estatisticas\" />
-    <Folder Include="Views\Partidas\" />
-    <Folder Include="Views\Times\" />
     <Folder Include="Views\Time\" />
   </ItemGroup>
   <ItemGroup>
@@ -243,8 +263,8 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202504180259488_Initial.resx">
-      <DependentUpon>202504180259488_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202504180333031_AjustePartida.resx">
+      <DependentUpon>202504180333031_AjustePartida.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

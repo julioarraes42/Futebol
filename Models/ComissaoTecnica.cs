@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -20,6 +21,11 @@ namespace Futebol.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         public Cargo Cargo { get; set; }
+
+        [Display(Name = "Data de Nascimento")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
+        ApplyFormatInEditMode = true)]
         public DateTime DataNascimento { get; set; }
 
         public int TimeId { get; set; }

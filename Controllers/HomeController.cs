@@ -1,30 +1,46 @@
-﻿using System;
+﻿using Futebol.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace Futebol.Controllers
 {
     public class HomeController : Controller
     {
+        private LigaTabajaraContext db = new LigaTabajaraContext();
+
         public ActionResult Index()
         {
-            return View();
+            var times = db.Times.Include(t => t.Jogadores).Include(t => t.ComissaoTecnica).ToList();
+
+            bool ligaApta = VerificarLigaApta(times);
+
+            ViewBag.LigaApta = ligaApta;
+            return View(times);
         }
 
-        public ActionResult About()
+        private bool VerificarLigaApta(List<Time> times)
         {
-            ViewBag.Message = "Your application description page.";
+            if (times.Count != 20)
+                return false;
 
-            return View();
-        }
+            foreach (var time in times)
+            {
+                if (time.Jogadores == null || time.Jogadores.Count < 30)
+                    return false;
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+                if (time.ComissaoTecnica == null || time.ComissaoTecnica.Count < 5)
+                    return false;
 
-            return View();
+                var cargosDistintos = time.ComissaoTecnica.Select(c => c.Cargo).Distinct().Count();
+                if (cargosDistintos < 5)
+                    return false;
+            }
+
+            return true;
         }
     }
 }

@@ -7,13 +7,13 @@ namespace Futebol.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.5.1")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class AjustePartida : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AjustePartida));
         
         string IMigrationMetadata.Id
         {
-            get { return "202504180259488_Initial"; }
+            get { return "202504180333031_AjustePartida"; }
         }
         
         string IMigrationMetadata.Source
