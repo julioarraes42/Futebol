@@ -1,90 +1,68 @@
 ﻿@model Futebol.Models.Time
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes do Time";
 }
 
-<h2>Details</h2>
+<h1>@Model.Nome</h1>
 
-<div>
-    <h4>Time</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
+<p><strong>Cidade:</strong> @Model.Cidade</p>
+<p><strong>Estado:</strong> @Model.Estado</p>
+<p><strong>Ano de Fundação:</strong> @Model.AnoFundacao</p>
+<p><strong>Estádio:</strong> @Model.Estadio (@Model.CapacidadeEstadio pessoas)</p>
+<p><strong>Uniforme:</strong> @Model.CorUniformePrimaria / @Model.CorUniformeSecundaria</p>
+<p><strong>Status:</strong> @(Model.AptoParaLiga ? "Apto" : "Não Apto")</p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+<hr />
+<h2>Jogadores</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Posição</th>
+            <th>Número</th>
+            <th>Altura (m)</th>
+            <th>Peso (kg)</th>
+            <th>Pé Preferido</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var jogador in Model.Jogadores)
+        {
+            <tr>
+                <td>@jogador.Nome</td>
+                <td>@jogador.Posicao</td>
+                <td>@jogador.NumeroCamisa</td>
+                <td>@jogador.Altura</td>
+                <td>@jogador.Peso</td>
+                <td>@jogador.PePreferido</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cidade)
-        </dt>
+<hr />
 
-        <dd>
-            @Html.DisplayFor(model => model.Cidade)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AnoFundacao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AnoFundacao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Estadio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Estadio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CapacidadeEstadio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CapacidadeEstadio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CorUniformePrimaria)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CorUniformePrimaria)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CorUniformeSecundaria)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CorUniformeSecundaria)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AptoParaLiga)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AptoParaLiga)
-        </dd>
-
-    </dl>
-</div>
+<h2>Comissão Técnica</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Cargo</th>
+            <th>Data de Nascimento</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var membro in Model.ComissaoTecnica)
+        {
+            <tr>
+                <td>@membro.Nome</td>
+                <td>@membro.Cargo</td>
+                <td>@membro.DataNascimento.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar para a lista", "Index", null, new { @class = "btn btn-secondary" })
 </p>

@@ -99,5 +99,24 @@ namespace Futebol.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult RankingArtilheiros()
+        {
+            var jogadores = db.Jogadores.ToList();
+            var estatisticas = db.Estatisticas.ToList();
+
+            var ranking = jogadores
+                .Select(j => new RankingArtilheiroViewModel
+                {
+                    JogadorNome = j.Nome,
+                    TimeNome = db.Times.FirstOrDefault(t => t.Id == j.TimeId)?.Nome ?? "Sem Time",
+                    TotalGols = estatisticas.Where(e => e.JogadorId == j.Id).Sum(e => e.Gols)
+                })
+                .GroupBy(x => x.TimeNome)
+                .Select(g => g.OrderByDescending(x => x.TotalGols).First()) 
+                .ToList();
+
+            return View(ranking);
+        }
     }
 }

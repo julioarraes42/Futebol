@@ -44,3 +44,15 @@
             }
         </tbody>
     </table>
+    <p>
+        @Html.ActionLink("Gerar Partidas", "GerarPartidas", "Home", new { @class = "btn btn-success" })
+    </p>
+
+    @if (TempData["Sucesso"] != null)
+    {
+        <div class="alert alert-success">@TempData["Sucesso"]</div>
+    }
+    @if (TempData["Erro"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Erro"]</div>
+    }

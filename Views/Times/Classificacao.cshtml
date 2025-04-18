@@ -1,0 +1,43 @@
+﻿
+@model List<Futebol.Models.ClassificacaoViewModel>
+
+@{
+    ViewBag.Title = "Classificação";
+}
+
+<h2>Classificação Geral</h2>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Time</th>
+            <th>Pontos</th>
+            <th>Vitórias</th>
+            <th>Empates</th>
+            <th>Derrotas</th>
+            <th>Gols Marcados</th>
+            <th>Gols Sofridos</th>
+            <th>Saldo de Gols</th>
+            <th>Aproveitamento (%)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>@Model[i].NomeTime</td>
+                <td>@Model[i].Pontos</td>
+                <td>@Model[i].Vitorias</td>
+                <td>@Model[i].Empates</td>
+                <td>@Model[i].Derrotas</td>
+                <td>@Model[i].GolsMarcados</td>
+                <td>@Model[i].GolsSofridos</td>
+                <td>@Model[i].SaldoGols</td>
+                <td>@Model[i].Aproveitamento.ToString("F1")%</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

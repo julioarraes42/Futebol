@@ -1,90 +1,81 @@
-﻿@model Futebol.Models.Jogador
+﻿@model Futebol.Models.Partida
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes da Partida";
 }
 
-<h2>Details</h2>
+<h2>Detalhes da Partida</h2>
 
 <div>
-    <h4>Jogador</h4>
+    <h4>Partida</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Time.Nome)
-        </dt>
-
+        <dt>Rodada</dt>
         <dd>
-            @Html.DisplayFor(model => model.Time.Nome)
+            @Model.Rodada
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-
+        <dt>Time Casa</dt>
         <dd>
-            @Html.DisplayFor(model => model.Nome)
+            @Model.TimeCasa.Nome
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DataNascimento)
-        </dt>
-
+        <dt>Gols do Time Casa</dt>
         <dd>
-            @Html.DisplayFor(model => model.DataNascimento)
+            @Model.GolsCasa
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nacionalidade)
-        </dt>
-
+        <dt>Time Visitante</dt>
         <dd>
-            @Html.DisplayFor(model => model.Nacionalidade)
+            @Model.TimeFora.Nome
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Posicao)
-        </dt>
-
+        <dt>Gols do Time Visitante</dt>
         <dd>
-            @Html.DisplayFor(model => model.Posicao)
+            @Model.GolsFora
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NumeroCamisa)
-        </dt>
-
+        <dt>Data e Hora</dt>
         <dd>
-            @Html.DisplayFor(model => model.NumeroCamisa)
+            @Model.Data.ToString("dd/MM/yyyy HH:mm")
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Altura)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Altura)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Peso)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Peso)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PePreferido)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PePreferido)
-        </dd>
-
     </dl>
 </div>
+
+<br />
+
+<h4>Gols da Partida</h4>
+<hr />
+
+@if (Model.Estatisticas != null && Model.Estatisticas.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Jogador</th>
+                <th>Time</th>
+                <th>Gols Marcados</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var estatistica in Model.Estatisticas)
+            {
+                <tr>
+                    <td>@estatistica.Jogador.Nome</td>
+                    <td>@estatistica.Jogador.Time.Nome</td>
+                    <td>@estatistica.Gols</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p><i>Essa partida ainda não teve gols registrados.</i></p>
+}
+
+<br />
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar Partida", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Voltar à Lista", "Index")
 </p>

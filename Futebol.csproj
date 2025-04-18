@@ -145,11 +145,13 @@
       <DependentUpon>202504180333031_AjustePartida.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ClassificacaoViewModel.cs" />
     <Compile Include="Models\ComissaoTecnica.cs" />
     <Compile Include="Models\Estatistica.cs" />
     <Compile Include="Models\Jogador.cs" />
     <Compile Include="Models\LigaTabajaraContext.cs" />
     <Compile Include="Models\Partida.cs" />
+    <Compile Include="Models\RankingArtilheiroViewModel.cs" />
     <Compile Include="Models\Time.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -229,11 +231,13 @@
     <Content Include="Views\Estatisticas\Create.cshtml" />
     <Content Include="Views\Estatisticas\Edit.cshtml" />
     <Content Include="Views\Estatisticas\Delete.cshtml" />
+    <Content Include="Views\Partidas\RegistrarResultado.cshtml" />
+    <Content Include="Views\Times\Classificacao.cshtml" />
+    <Content Include="Views\Jogadores\RankingArtilheiros.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
-    <Folder Include="Views\Time\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

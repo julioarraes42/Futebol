@@ -114,5 +114,116 @@ namespace Futebol.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult GerarPartidas()
+        {
+            var times = db.Times.Where(t => t.AptoParaLiga).ToList();
+
+            if (times.Count != 20)
+            {
+                TempData["Erro"] = "É necessário exatamente 20 times aptos para gerar o campeonato.";
+                return RedirectToAction("Index");
+            }
+
+            var partidas = new List<Partida>();
+            int rodada = 1;
+
+            for (int i = 0; i < times.Count; i++)
+            {
+                for (int j = 0; j < times.Count; j++)
+                {
+                    if (i != j)
+                    {
+                        partidas.Add(new Partida
+                        {
+                            TimeCasaId = times[i].Id,
+                            TimeForaId = times[j].Id,
+                            Data = DateTime.Now.AddDays(rodada),
+                            Rodada = rodada
+                        });
+
+                        rodada++;
+                    }
+                }
+            }
+
+            db.Partidas.AddRange(partidas);
+            db.SaveChanges();
+
+            TempData["Sucesso"] = "Partidas geradas com sucesso!";
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult RegistrarResultado(int id)
+        {
+            var partida = db.Partidas
+                .Include(p => p.TimeCasa)
+                .Include(p => p.TimeFora)
+                .FirstOrDefault(p => p.Id == id);
+
+            if (partida == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (partida.GolsCasa == null && partida.GolsFora == null)
+            {
+                Random random = new Random();
+                partida.GolsCasa = random.Next(0, 5);
+                partida.GolsFora = random.Next(0, 5);
+            }
+
+            var jogadoresCasa = db.Jogadores.Where(j => j.TimeId == partida.TimeCasa.Id).ToList();
+            var jogadoresFora = db.Jogadores.Where(j => j.TimeId == partida.TimeFora.Id).ToList();
+
+            ViewBag.JogadoresCasa = new SelectList(jogadoresCasa, "Id", "Nome");
+            ViewBag.JogadoresFora = new SelectList(jogadoresFora, "Id", "Nome");
+
+            return View(partida);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RegistrarResultado(Partida partidaForm, List<int> GolsCasa, List<int> GolsFora)
+        {
+            var partida = db.Partidas
+                .Include(p => p.TimeCasa)
+                .Include(p => p.TimeFora)
+                .FirstOrDefault(p => p.Id == partidaForm.Id);
+
+            if (partida == null)
+            {
+                return HttpNotFound();
+            }
+
+            partida.GolsCasa = partidaForm.GolsCasa;
+            partida.GolsFora = partidaForm.GolsFora;
+
+            foreach (var jogadorId in GolsCasa)
+            {
+                var estatistica = new Estatistica
+                {
+                    PartidaId = partida.Id,
+                    JogadorId = jogadorId,
+                    Gols = 1
+                };
+                db.Estatisticas.Add(estatistica);
+            }
+
+            foreach (var jogadorId in GolsFora)
+            {
+                var estatistica = new Estatistica
+                {
+                    PartidaId = partida.Id,
+                    JogadorId = jogadorId,
+                    Gols = 1
+                };
+                db.Estatisticas.Add(estatistica);
+            }
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index"); 
+        }
     }
 }

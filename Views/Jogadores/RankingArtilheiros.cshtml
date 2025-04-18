@@ -1,0 +1,24 @@
+﻿
+@model List<Futebol.Models.RankingArtilheiroViewModel>
+
+<h2>Ranking de Artilheiros</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Jogador</th>
+            <th>Time</th>
+            <th>Gols</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.JogadorNome</td>
+                <td>@item.TimeNome</td>
+                <td>@item.TotalGols</td>
+            </tr>
+        }
+    </tbody>
+</table>

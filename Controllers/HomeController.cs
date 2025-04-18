@@ -42,5 +42,90 @@ namespace Futebol.Controllers
 
             return true;
         }
+
+        public ActionResult GerarPartidas()
+        {
+            db.Estatisticas.RemoveRange(db.Estatisticas);
+            db.Partidas.RemoveRange(db.Partidas);
+            db.SaveChanges();
+
+            var times = db.Times.Where(t => t.AptoParaLiga == true).ToList();
+
+            if (times.Count != 20)
+            {
+                TempData["Erro"] = "É necessário ter exatamente 20 times aptos para gerar o campeonato.";
+                return RedirectToAction("Index");
+            }
+
+            var random = new Random();
+            var rodadas = new List<Tuple<Time, Time>>();
+
+            foreach (var timeCasa in times)
+            {
+                foreach (var timeFora in times)
+                {
+                    if (timeCasa.Id != timeFora.Id)
+                    {
+                        rodadas.Add(Tuple.Create(timeCasa, timeFora));
+                    }
+                }
+            }
+
+            foreach (var rodada in rodadas)
+            {
+                var golsCasa = random.Next(0, 6); 
+                var golsFora = random.Next(0, 6);
+
+                var partida = new Partida
+                {
+                    TimeCasaId = rodada.Item1.Id,
+                    TimeForaId = rodada.Item2.Id,
+                    Data = DateTime.Now.AddDays(random.Next(1, 100)), 
+                    GolsCasa = golsCasa,
+                    GolsFora = golsFora
+                };
+
+                db.Partidas.Add(partida);
+                db.SaveChanges(); 
+
+
+                var jogadoresCasa = db.Jogadores.Where(j => j.TimeId == rodada.Item1.Id).ToList();
+
+                var jogadoresFora = db.Jogadores.Where(j => j.TimeId == rodada.Item2.Id).ToList();
+
+                for (int i = 0; i < golsCasa; i++)
+                {
+                    if (jogadoresCasa.Any())
+                    {
+                        var jogador = jogadoresCasa[random.Next(jogadoresCasa.Count)];
+                        db.Estatisticas.Add(new Estatistica
+                        {
+                            JogadorId = jogador.Id,
+                            PartidaId = partida.Id,
+                            Gols = 1
+                        });
+                    }
+                }
+
+                for (int i = 0; i < golsFora; i++)
+                {
+                    if (jogadoresFora.Any())
+                    {
+                        var jogador = jogadoresFora[random.Next(jogadoresFora.Count)];
+                        db.Estatisticas.Add(new Estatistica
+                        {
+                            JogadorId = jogador.Id,
+                            PartidaId = partida.Id,
+                            Gols = 1
+                        });
+                    }
+                }
+
+                db.SaveChanges();
+            }
+
+            TempData["Sucesso"] = "Partidas e resultados gerados com sucesso!";
+            return RedirectToAction("Index");
+        }
     }
 }
