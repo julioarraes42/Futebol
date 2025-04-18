@@ -13,9 +13,25 @@ namespace Futebol.Controllers
     {
         private LigaTabajaraContext db = new LigaTabajaraContext();
 
-        public ActionResult Index()
+        public ActionResult Index(string searchNome, Posicao? searchPosicao, PePreferido? searchPePreferido)
         {
-            var jogadores = db.Jogadores.Include(j => j.Time);
+            var jogadores = db.Jogadores.Include("Time").AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchNome))
+            {
+                jogadores = jogadores.Where(j => j.Nome.Contains(searchNome));
+            }
+
+            if (searchPosicao.HasValue)
+            {
+                jogadores = jogadores.Where(j => j.Posicao == searchPosicao.Value);
+            }
+
+            if (searchPePreferido.HasValue)
+            {
+                jogadores = jogadores.Where(j => j.PePreferido == searchPePreferido.Value);
+            }
+
             return View(jogadores.ToList());
         }
 

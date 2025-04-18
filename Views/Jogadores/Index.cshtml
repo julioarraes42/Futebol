@@ -4,78 +4,70 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Jogadores</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "Jogadores", FormMethod.Get))
+{
+    <div class="form-inline">
+        <div class="form-group">
+            @Html.Label("Nome")
+            @Html.TextBox("searchNome", Request.QueryString["searchNome"], new { @class = "form-control", placeholder = "Nome do jogador" })
+        </div>
+        <div class="form-group" style="margin-left: 10px;">
+            @Html.Label("Posição")
+            @Html.DropDownList("searchPosicao",
+                new SelectList(Enum.GetValues(typeof(Futebol.Models.Posicao))),
+                "Todas",
+                new { @class = "form-control" })
+        </div>
+        <div class="form-group" style="margin-left: 10px;">
+            @Html.Label("Pé Preferido")
+            @Html.DropDownList("searchPePreferido",
+                new SelectList(Enum.GetValues(typeof(Futebol.Models.PePreferido))),
+                "Todos",
+                new { @class = "form-control" })
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-left: 10px;">Buscar</button>
+    </div>
+}
+
+<br />
+
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Time.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataNascimento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nacionalidade)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Posicao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumeroCamisa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Altura)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Peso)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PePreferido)
-        </th>
+        <th>@Html.DisplayNameFor(model => model.Time.Nome)</th>
+        <th>@Html.DisplayNameFor(model => model.Nome)</th>
+        <th>@Html.DisplayNameFor(model => model.DataNascimento)</th>
+        <th>@Html.DisplayNameFor(model => model.Nacionalidade)</th>
+        <th>@Html.DisplayNameFor(model => model.Posicao)</th>
+        <th>@Html.DisplayNameFor(model => model.NumeroCamisa)</th>
+        <th>@Html.DisplayNameFor(model => model.Altura)</th>
+        <th>@Html.DisplayNameFor(model => model.Peso)</th>
+        <th>@Html.DisplayNameFor(model => model.PePreferido)</th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Time.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataNascimento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nacionalidade)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Posicao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumeroCamisa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Altura)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Peso)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PePreferido)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Time.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.DataNascimento)</td>
+            <td>@Html.DisplayFor(modelItem => item.Nacionalidade)</td>
+            <td>@Html.DisplayFor(modelItem => item.Posicao)</td>
+            <td>@Html.DisplayFor(modelItem => item.NumeroCamisa)</td>
+            <td>@Html.DisplayFor(modelItem => item.Altura)</td>
+            <td>@Html.DisplayFor(modelItem => item.Peso)</td>
+            <td>@Html.DisplayFor(modelItem => item.PePreferido)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 </table>
