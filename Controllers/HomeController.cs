@@ -127,5 +127,69 @@ namespace Futebol.Controllers
             TempData["Sucesso"] = "Partidas e resultados gerados com sucesso!";
             return RedirectToAction("Index");
         }
+
+        public ActionResult Classificacao()
+        {
+            var times = db.Times.ToList();
+            var partidas = db.Partidas.ToList();
+
+            var classificacao = new List<ClassificacaoTime>();
+
+            foreach (var time in times)
+            {
+                int pontos = 0, vitorias = 0, empates = 0, derrotas = 0, golsPro = 0, golsContra = 0;
+
+                var partidasCasa = partidas.Where(p => p.TimeCasaId == time.Id && p.GolsCasa.HasValue && p.GolsFora.HasValue);
+                var partidasFora = partidas.Where(p => p.TimeForaId == time.Id && p.GolsCasa.HasValue && p.GolsFora.HasValue);
+
+                foreach (var partida in partidasCasa)
+                {
+                    golsPro += partida.GolsCasa.Value;
+                    golsContra += partida.GolsFora.Value;
+
+                    if (partida.GolsCasa > partida.GolsFora)
+                        vitorias++;
+                    else if (partida.GolsCasa == partida.GolsFora)
+                        empates++;
+                    else
+                        derrotas++;
+                }
+
+                foreach (var partida in partidasFora)
+                {
+                    golsPro += partida.GolsFora.Value;
+                    golsContra += partida.GolsCasa.Value;
+
+                    if (partida.GolsFora > partida.GolsCasa)
+                        vitorias++;
+                    else if (partida.GolsFora == partida.GolsCasa)
+                        empates++;
+                    else
+                        derrotas++;
+                }
+
+                pontos = (vitorias * 3) + (empates * 1);
+
+                classificacao.Add(new ClassificacaoTime
+                {
+                    NomeTime = time.Nome,
+                    Pontos = pontos,
+                    Vitorias = vitorias,
+                    Empates = empates,
+                    Derrotas = derrotas,
+                    GolsPro = golsPro,
+                    GolsContra = golsContra,
+                    SaldoGols = golsPro - golsContra
+                });
+            }
+
+            var classificacaoOrdenada = classificacao
+                .OrderByDescending(c => c.Pontos)
+                .ThenByDescending(c => c.SaldoGols)
+                .ThenByDescending(c => c.GolsPro)
+                .ToList();
+
+            return View(classificacaoOrdenada);
+        }
     }
 }

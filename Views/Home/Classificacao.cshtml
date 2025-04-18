@@ -1,0 +1,37 @@
+﻿
+@model List<Futebol.Models.ClassificacaoTime>
+
+<h2>Tabela de Classificação</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Posição</th>
+            <th>Time</th>
+            <th>Pontos</th>
+            <th>Vitórias</th>
+            <th>Empates</th>
+            <th>Derrotas</th>
+            <th>Gols Pró</th>
+            <th>Gols Contra</th>
+            <th>Saldo de Gols</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>@Model[i].NomeTime</td>
+                <td>@Model[i].Pontos</td>
+                <td>@Model[i].Vitorias</td>
+                <td>@Model[i].Empates</td>
+                <td>@Model[i].Derrotas</td>
+                <td>@Model[i].GolsPro</td>
+                <td>@Model[i].GolsContra</td>
+                <td>@Model[i].SaldoGols</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

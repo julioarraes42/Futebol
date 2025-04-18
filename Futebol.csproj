@@ -145,6 +145,7 @@
       <DependentUpon>202504180333031_AjustePartida.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ClassificacaoTime.cs" />
     <Compile Include="Models\ClassificacaoViewModel.cs" />
     <Compile Include="Models\ComissaoTecnica.cs" />
     <Compile Include="Models\Estatistica.cs" />
@@ -234,6 +235,7 @@
     <Content Include="Views\Partidas\RegistrarResultado.cshtml" />
     <Content Include="Views\Times\Classificacao.cshtml" />
     <Content Include="Views\Jogadores\RankingArtilheiros.cshtml" />
+    <Content Include="Views\Home\Classificacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
