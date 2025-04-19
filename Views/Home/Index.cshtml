@@ -1,58 +1,59 @@
-﻿@@model List<Futebol.Models.Time>
+﻿@model List<Futebol.Models.Time>
 
-    @{
-        ViewBag.Title = "Liga Tabajara de Futebol";
-    }
+@{
+    ViewBag.Title = "Liga Tabajara de Futebol";
+}
 
-    <h1>Liga Tabajara de Futebol</h1>
+<h1 class="text-center mb-4">Liga Tabajara de Futebol</h1>
 
-    <h2>Status da Liga:</h2>
-    @if (ViewBag.LigaApta)
-    {
-        <span style="color:green; font-weight:bold;">Apta para iniciar o campeonato!</span>
-    }
-    else
-    {
-        <span style="color:red; font-weight:bold;">Não apta para iniciar o campeonato!</span>
-    }
+<h2>Status da Liga:</h2>
+@if (ViewBag.LigaApta)
+{
+    <span style="color:limegreen; font-weight:bold;">Apta para iniciar o campeonato!</span>
+}
+else
+{
+    <span style="color:crimson; font-weight:bold;">Não apta para iniciar o campeonato!</span>
+}
 
-    <hr />
+<hr />
 
-    <h2>Times Participantes</h2>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Cidade</th>
-                <th>Estado</th>
-                <th>Estádio</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var time in Model)
-            {
-                <tr>
-                    <td>@time.Nome</td>
-                    <td>@time.Cidade</td>
-                    <td>@time.Estado</td>
-                    <td>@time.Estadio</td>
-                    <td>
-                        @Html.ActionLink("Ver detalhes", "Details", "Times", new { id = time.Id }, new { @class = "btn btn-primary btn-sm" })
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <p>
-        @Html.ActionLink("Gera novo Campeonato", "GerarPartidas", "Home", new { @class = "btn btn-success" })
-    </p>
+<h2 class="mb-3">Times Participantes</h2>
+
+<div class="p-4 mb-5" style="background-color: #00cc66; border-radius: 10px;">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var time in Model)
+        {
+            <div class="col">
+                <div class="card h-100 text-white" style="background-color: #013220; border: 2px solid #39ff14;">
+                    <div class="card-body">
+                        <h5 class="card-title">@time.Nome</h5>
+                        <p class="card-text">
+                            <strong>Cidade:</strong> @time.Cidade <br />
+                            <strong>Estado:</strong> @time.Estado <br />
+                            <strong>Estádio:</strong> @time.Estadio
+                        </p>
+                    </div>
+                    <div class="card-footer text-center bg-transparent border-0">
+                        @Html.ActionLink("Ver detalhes", "Details", "Times", new { id = time.Id }, new { @class = "btn btn-outline-light btn-sm" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="d-flex flex-column align-items-center gap-3">
+    @Html.ActionLink("Gerar novo Campeonato", "GerarPartidas", "Home", null, new { @class = "btn btn-success btn-lg" })
 
     @if (TempData["Sucesso"] != null)
     {
-        <div class="alert alert-success">@TempData["Sucesso"]</div>
+        <div class="alert alert-success w-50 text-center">@TempData["Sucesso"]</div>
     }
     @if (TempData["Erro"] != null)
     {
-        <div class="alert alert-danger">@TempData["Erro"]</div>
+        <div class="alert alert-danger w-50 text-center">@TempData["Erro"]</div>
     }
+
+    @Html.ActionLink("Gerar Times Automaticamente", "PopularBancoDeDados", "Home", null, new { @class = "btn btn-warning btn-lg" })
+</div>

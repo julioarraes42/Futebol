@@ -29,7 +29,7 @@ namespace Futebol.Controllers
 
             foreach (var time in times)
             {
-                if (time.Jogadores == null || time.Jogadores.Count < 30)
+                if (time.Jogadores == null || time.Jogadores.Count < 20)
                     return false;
 
                 if (time.ComissaoTecnica == null || time.ComissaoTecnica.Count < 5)

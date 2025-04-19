@@ -1,37 +1,57 @@
-﻿
-@model List<Futebol.Models.ClassificacaoTime>
+﻿@model List<Futebol.Models.ClassificacaoTime>
 
-<h2>Tabela de Classificação</h2>
+<h2 class="text-center mb-4">Tabela de Classificação</h2>
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Posição</th>
-            <th>Time</th>
-            <th>Pontos</th>
-            <th>Vitórias</th>
-            <th>Empates</th>
-            <th>Derrotas</th>
-            <th>Gols Pró</th>
-            <th>Gols Contra</th>
-            <th>Saldo de Gols</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="p-4 mb-5" style="background-color: #665500; border-radius: 10px;">
+    <!-- Fundo amarelo escuro -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
         @for (int i = 0; i < Model.Count; i++)
         {
-            <tr>
-                <td>@(i + 1)</td>
-                <td>@Model[i].NomeTime</td>
-                <td>@Model[i].Pontos</td>
-                <td>@Model[i].Vitorias</td>
-                <td>@Model[i].Empates</td>
-                <td>@Model[i].Derrotas</td>
-                <td>@Model[i].GolsPro</td>
-                <td>@Model[i].GolsContra</td>
-                <td>@Model[i].SaldoGols</td>
-            </tr>
-        }
-    </tbody>
-</table>
+            string cardColor;
+            string borderColor;
 
+            if (i == 0)
+            {
+                // Primeiro lugar - Ouro
+                cardColor = "#fff8b5";    // Amarelo claro
+                borderColor = "#ffd700";  // Dourado
+            }
+            else if (i == 1)
+            {
+                // Segundo lugar - Prata azulada
+                cardColor = "#b0c4de";    // LightSteelBlue (prata azulada)
+                borderColor = "#4682b4";  // SteelBlue (azul mais forte)
+            }
+            else if (i == 2)
+            {
+                // Terceiro lugar - Bronze
+                cardColor = "#cd7f32";    // Bronze
+                borderColor = "#b87333";  // Bronze escuro
+            }
+            else
+            {
+                // Restante - Cinza normal
+                cardColor = "#e0e0e0";    // Cinza claro
+                borderColor = "#a9a9a9";  // Cinza escuro
+            }
+            <div class="col">
+                <div class="card h-100 text-dark" style="background-color:@cardColor; border: 2px solid @borderColor;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">
+                            @(i + 1)º - @Model[i].NomeTime
+                        </h5>
+                        <p class="card-text">
+                            <strong>Pontos:</strong> @Model[i].Pontos <br />
+                            <strong>Vitórias:</strong> @Model[i].Vitorias <br />
+                            <strong>Empates:</strong> @Model[i].Empates <br />
+                            <strong>Derrotas:</strong> @Model[i].Derrotas <br />
+                            <strong>Gols Pró:</strong> @Model[i].GolsPro <br />
+                            <strong>Gols Contra:</strong> @Model[i].GolsContra <br />
+                            <strong>Saldo de Gols:</strong> @Model[i].SaldoGols
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
