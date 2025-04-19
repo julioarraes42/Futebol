@@ -13,9 +13,20 @@ namespace Futebol.Controllers
     {
         private LigaTabajaraContext db = new LigaTabajaraContext();
 
-        public ActionResult Index()
+        public ActionResult Index(string searchNome, Cargo? searchCargo)
         {
-            var comissaoTecnica = db.ComissoesTecnicas.Include(j => j.Time);
+            var comissaoTecnica = db.ComissoesTecnicas.Include("Time").AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchNome))
+            {
+                comissaoTecnica = comissaoTecnica.Where(j => j.Nome.Contains(searchNome));
+            }
+
+            if (searchCargo.HasValue)
+            {
+                comissaoTecnica = comissaoTecnica.Where(j => j.Cargo == searchCargo.Value);
+            }
+
             return View(comissaoTecnica.ToList());
         }
 

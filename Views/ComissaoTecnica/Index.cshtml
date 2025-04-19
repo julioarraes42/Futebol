@@ -9,43 +9,50 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "ComissaoTecnica", FormMethod.Get))
+{
+    <div class="form-inline">
+        <div class="form-group">
+            @Html.Label("Nome")
+            @Html.TextBox("searchNome", Request.QueryString["searchNome"], new { @class = "form-control", placeholder = "Nome do Funcionario" })
+        </div>
+        <div class="form-group" style="margin-left: 10px;">
+            @Html.Label("Cargo")
+            @Html.DropDownList("searchPosicao",
+                new SelectList(Enum.GetValues(typeof(Futebol.Models.Posicao))),
+                "Todas",
+                new { @class = "form-control" })
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-left: 10px;">Buscar</button>
+    </div>
+}
+<br />
+
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Time.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cargo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataNascimento)
-        </th>
+        <th>@Html.DisplayNameFor(model => model.Nome)</th>
+        <th>@Html.DisplayNameFor(model => model.Time.Nome)</th>
+        <th>@Html.DisplayNameFor(model => model.DataNascimento)</th>
+        <th>@Html.DisplayNameFor(model => model.Cargo)</th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Time.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cargo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataNascimento)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.Time.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.DataNascimento)</td>
+            <td>@Html.DisplayFor(modelItem => item.Cargo)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
+
+
