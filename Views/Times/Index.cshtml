@@ -1,81 +1,45 @@
 ﻿@model IEnumerable<Futebol.Models.Time>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Times";
 }
 
-<h2>Index</h2>
+<h2 class="text-center mb-4 text-warning fw-bold">Times</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+<p class="text-center">
+    @Html.ActionLink("Criar Novo Time", "Create", null, new { @class = "btn btn-success btn-lg shadow-sm" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cidade)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AnoFundacao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estadio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CapacidadeEstadio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CorUniformePrimaria)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CorUniformeSecundaria)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AptoParaLiga)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cidade)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AnoFundacao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estadio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CapacidadeEstadio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CorUniformePrimaria)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CorUniformeSecundaria)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AptoParaLiga)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="table-responsive mb-5">
+    <table class="table table-bordered table-hover table-striped" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <thead style="background-color: #00cc66; color: white;">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Nome)</th>
+                <th>@Html.DisplayNameFor(model => model.Cidade)</th>
+                <th>@Html.DisplayNameFor(model => model.Estado)</th>
+                <th>@Html.DisplayNameFor(model => model.Estadio)</th>
+                <th>@Html.DisplayNameFor(model => model.AptoParaLiga)</th>
+                <th class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="background-color: #f8f9fa; color: #001f3f;">
+                    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Cidade)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Estadio)</td>
+                    <td>@Html.DisplayFor(modelItem => item.AptoParaLiga)</td>
+                    <td class="text-center">
+                        <div class="d-flex justify-content-center gap-2">
+                            @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+                            @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

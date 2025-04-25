@@ -1,90 +1,48 @@
 ﻿@model Futebol.Models.Jogador
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes do Jogador";
 }
 
-<h2>Details</h2>
+<h2 class="text-center mb-4 text-warning fw-bold">Detalhes do Jogador</h2>
 
-<div>
-    <h4>Jogador</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Time.Nome)
-        </dt>
+<div class="p-4 mb-5" style="background-color: #013220; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); color: white;">
+    <h3 class="text-center text-light">@Model.Nome</h3>
+    <hr class="border-light" />
+    <dl class="row">
+        <dt class="col-sm-4 text-light">Time</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Time.Nome)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Time.Nome)
-        </dd>
+        <dt class="col-sm-4 text-light">Nome</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Nome)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
+        <dt class="col-sm-4 text-light">Data de Nascimento</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.DataNascimento)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+        <dt class="col-sm-4 text-light">Nacionalidade</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Nacionalidade)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DataNascimento)
-        </dt>
+        <dt class="col-sm-4 text-light">Posição</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Posicao)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DataNascimento)
-        </dd>
+        <dt class="col-sm-4 text-light">Número da Camisa</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.NumeroCamisa)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nacionalidade)
-        </dt>
+        <dt class="col-sm-4 text-light">Altura</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Altura)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nacionalidade)
-        </dd>
+        <dt class="col-sm-4 text-light">Peso</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Peso)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Posicao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Posicao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NumeroCamisa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NumeroCamisa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Altura)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Altura)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Peso)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Peso)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PePreferido)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PePreferido)
-        </dd>
-
+        <dt class="col-sm-4 text-light">Pé Preferido</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.PePreferido)</dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="text-center">
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-lg shadow-sm" })
+    @Html.ActionLink("Voltar à Lista", "Index", null, new { @class = "btn btn-warning btn-lg shadow-sm ms-3" })
+</div>
+
+
+

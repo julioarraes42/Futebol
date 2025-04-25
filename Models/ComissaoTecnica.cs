@@ -28,7 +28,10 @@ namespace Futebol.Models
         ApplyFormatInEditMode = true)]
         public DateTime DataNascimento { get; set; }
 
+        [Required] 
         public int TimeId { get; set; }
+
+        [Required] 
         public virtual Time Time { get; set; }
     }
 }

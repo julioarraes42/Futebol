@@ -1,96 +1,51 @@
 ﻿@model Futebol.Models.Time
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Excluir Time";
 }
 
-<h2>Delete</h2>
+<h2 class="text-center mb-4 text-warning fw-bold">Excluir Time</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Time</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
+<div class="p-4 mb-5" style="background-color: #013220; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); color: white;">
+    <h3 class="text-center text-light">Tem certeza de que deseja excluir este time?</h3>
+    <hr class="border-light" />
+    <dl class="row">
+        <dt class="col-sm-4 text-light">Nome</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Nome)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+        <dt class="col-sm-4 text-light">Cidade</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Cidade)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cidade)
-        </dt>
+        <dt class="col-sm-4 text-light">Estado</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Estado)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cidade)
-        </dd>
+        <dt class="col-sm-4 text-light">Ano de Fundação</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.AnoFundacao)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
+        <dt class="col-sm-4 text-light">Estádio</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Estadio)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
+        <dt class="col-sm-4 text-light">Capacidade do Estádio</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.CapacidadeEstadio)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AnoFundacao)
-        </dt>
+        <dt class="col-sm-4 text-light">Cor do Uniforme Primário</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.CorUniformePrimaria)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.AnoFundacao)
-        </dd>
+        <dt class="col-sm-4 text-light">Cor do Uniforme Secundário</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.CorUniformeSecundaria)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Estadio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Estadio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CapacidadeEstadio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CapacidadeEstadio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CorUniformePrimaria)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CorUniformePrimaria)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CorUniformeSecundaria)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CorUniformeSecundaria)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AptoParaLiga)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AptoParaLiga)
-        </dd>
-
+        <dt class="col-sm-4 text-light">Apto para Liga</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.AptoParaLiga)</dd>
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div class="text-center mt-4">
+            <input type="submit" value="Excluir" class="btn btn-danger btn-lg shadow-sm" />
+            @Html.ActionLink("Voltar à Lista", "Index", null, new { @class = "btn btn-warning btn-lg shadow-sm ms-3" })
         </div>
     }
 </div>
+

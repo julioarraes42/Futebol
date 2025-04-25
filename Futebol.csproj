@@ -148,6 +148,14 @@
     <Compile Include="Migrations\202504181846197_BdAtualizacao.Designer.cs">
       <DependentUpon>202504181846197_BdAtualizacao.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202504250339234_ConfigurarCascata.cs" />
+    <Compile Include="Migrations\202504250339234_ConfigurarCascata.Designer.cs">
+      <DependentUpon>202504250339234_ConfigurarCascata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202504250349325_ConfigurarCascata1.cs" />
+    <Compile Include="Migrations\202504250349325_ConfigurarCascata1.Designer.cs">
+      <DependentUpon>202504250349325_ConfigurarCascata1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ClassificacaoTime.cs" />
     <Compile Include="Models\ClassificacaoViewModel.cs" />
@@ -278,6 +286,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202504181846197_BdAtualizacao.resx">
       <DependentUpon>202504181846197_BdAtualizacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504250339234_ConfigurarCascata.resx">
+      <DependentUpon>202504250339234_ConfigurarCascata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504250349325_ConfigurarCascata1.resx">
+      <DependentUpon>202504250349325_ConfigurarCascata1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

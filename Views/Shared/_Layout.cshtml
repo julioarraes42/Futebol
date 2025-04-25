@@ -9,12 +9,26 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #343a40, #495057);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            color: #ffc107 !important;
+        }
+
         .nav-link-custom {
             font-weight: bold;
-            padding: 8px 15px;
-            border-radius: 10px;
-            margin-right: 8px;
-            transition: background-color 0.3s, color 0.3s;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-right: 10px;
+            transition: all 0.3s ease-in-out;
         }
 
         .liga-btn {
@@ -34,11 +48,12 @@
 
         .default-btn {
             background-color: #6c757d;
-            color: white;
+            color: #ffc107;
         }
 
         .nav-link-custom:hover {
-            opacity: 0.8;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         footer {
@@ -48,15 +63,24 @@
             background-color: #343a40;
             color: #ccc;
             border-radius: 10px;
+            font-size: 0.9rem;
         }
 
         .body-content {
             margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        hr {
+            border-top: 2px solid #6c757d;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark shadow-sm mb-4">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm shadow-sm mb-4">
         <div class="container">
             @Html.ActionLink("Liga Tabajara", "Index", "Home", new { area = "" }, new { @class = "navbar-brand fw-bold" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar a navegação" aria-controls="navbarSupportedContent"

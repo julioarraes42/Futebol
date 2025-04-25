@@ -194,6 +194,7 @@ namespace Futebol.Controllers
 
         public ActionResult PopularBancoDeDados()
         {
+            // Remover todas as entidades relacionadas
             db.Jogadores.RemoveRange(db.Jogadores);
             db.ComissoesTecnicas.RemoveRange(db.ComissoesTecnicas);
             db.Times.RemoveRange(db.Times);
@@ -202,16 +203,20 @@ namespace Futebol.Controllers
             Random random = new Random();
 
             var nomesTimes = new List<string>
-            {
-                "Tabajara FC", "Galácticos", "Fúria Azul", "Trovões", "Leões do Norte",
-                "Águias da Montanha", "Falcões Vermelhos", "Tigres do Cerrado", "Lobos da Serra", "Guerreiros Urbanos",
-                "Dragões Dourados", "Fênix Negra", "Cavaleiros do Vale", "Santos de Aço", "Vikings Tropicais",
-                "Piratas do Sul", "Espartanos", "Corvos Brancos", "Samurais do Sertão", "Gladiadores Modernos"
-            };
+    {
+        "Tabajara FC", "Galácticos", "Fúria Azul", "Trovões", "Leões do Norte",
+        "Águias da Montanha", "Falcões Vermelhos", "Tigres do Cerrado", "Lobos da Serra", "Guerreiros Urbanos",
+        "Dragões Dourados", "Fênix Negra", "Cavaleiros do Vale", "Santos de Aço", "Vikings Tropicais",
+        "Piratas do Sul", "Espartanos", "Corvos Brancos", "Samurais do Sertão", "Gladiadores Modernos"
+    };
 
             var posicoes = Enum.GetValues(typeof(Posicao)).Cast<Posicao>().ToList();
             var pes = Enum.GetValues(typeof(PePreferido)).Cast<PePreferido>().ToList();
             var cargos = Enum.GetValues(typeof(Cargo)).Cast<Cargo>().ToList();
+
+            var times = new List<Time>();
+            var jogadores = new List<Jogador>();
+            var comissoes = new List<ComissaoTecnica>();
 
             foreach (var nomeTime in nomesTimes)
             {
@@ -228,8 +233,7 @@ namespace Futebol.Controllers
                     AptoParaLiga = true
                 };
 
-                db.Times.Add(time);
-                db.SaveChanges(); // salvar aqui pra pegar o ID do time
+                times.Add(time);
 
                 // Jogadores
                 for (int i = 1; i <= 30; i++)
@@ -244,10 +248,10 @@ namespace Futebol.Controllers
                         Altura = (float)(1.60 + random.NextDouble() * 0.4),
                         Peso = (float)(60 + random.NextDouble() * 30),
                         PePreferido = pes[random.Next(pes.Count)],
-                        TimeId = time.Id
+                        Time = time // Relaciona o jogador ao time
                     };
 
-                    db.Jogadores.Add(jogador);
+                    jogadores.Add(jogador);
                 }
 
                 // Comissão Técnica
@@ -258,14 +262,21 @@ namespace Futebol.Controllers
                         Nome = $"Comissao_{nomeTime}_{cargo}",
                         Cargo = cargo,
                         DataNascimento = DateTime.Now.AddYears(-random.Next(30, 60)),
-                        TimeId = time.Id
+                        Time = time // Relaciona o membro ao time
                     };
 
-                    db.ComissoesTecnicas.Add(membro);
+                    comissoes.Add(membro);
                 }
-
-                db.SaveChanges();
             }
+
+            // Adicionar todas as entidades ao contexto
+            db.Times.AddRange(times);
+            db.Jogadores.AddRange(jogadores);
+            db.ComissoesTecnicas.AddRange(comissoes);
+
+            // Salvar todas as alterações de uma vez
+            db.SaveChanges();
+
 
             return Content("Banco de dados populado com sucesso!");
         }

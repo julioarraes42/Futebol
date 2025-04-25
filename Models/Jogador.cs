@@ -39,7 +39,10 @@ namespace Futebol.Models
         public float Peso { get; set; }
         public PePreferido PePreferido { get; set; }
 
+        [Required] 
         public int TimeId { get; set; }
+
+        [Required] 
         public virtual Time Time { get; set; }
     }
 }

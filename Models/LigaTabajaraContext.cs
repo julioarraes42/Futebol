@@ -21,7 +21,19 @@ namespace Futebol.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            // Configurar exclusão em cascata para Jogadores
+            modelBuilder.Entity<Time>()
+                .HasMany(t => t.Jogadores)
+                .WithRequired(j => j.Time)
+                .HasForeignKey(j => j.TimeId)
+                .WillCascadeOnDelete(true);
+
+            // Configurar exclusão em cascata para ComissaoTecnica
+            modelBuilder.Entity<Time>()
+                .HasMany(t => t.ComissaoTecnica)
+                .WithRequired(c => c.Time)
+                .HasForeignKey(c => c.TimeId)
+                .WillCascadeOnDelete(true);
 
             base.OnModelCreating(modelBuilder);
         }
