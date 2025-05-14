@@ -1,0 +1,25 @@
+﻿@model List<Futebol.Models.RankingArtilheiroViewModel>
+
+<h2 class="text-center mb-4 text-warning fw-bold">Ranking de Artilheiros</h2>
+
+<div class="table-responsive mb-5">
+    <table class="table table-bordered table-hover table-striped" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <thead style="background-color: #00cc66; color: white;">
+            <tr>
+                <th scope="col">Jogador</th>
+                <th scope="col">Time</th>
+                <th scope="col">Gols Marcados</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr style="background-color: #f8f9fa; color: #001f3f;">
+                    <td>@Model[i].JogadorNome</td>
+                    <td>@Model[i].TimeNome</td>
+                    <td>@Model[i].TotalGols</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

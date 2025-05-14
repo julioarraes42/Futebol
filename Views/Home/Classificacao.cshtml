@@ -1,0 +1,60 @@
+﻿@model List<Futebol.Models.ClassificacaoTime>
+
+<h2 class="text-center mb-4 text-warning fw-bold">Tabela de Classificação</h2>
+
+<div class="table-responsive mb-5">
+    <table class="table table-bordered table-hover table-striped" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <thead style="background-color: #00cc66; color: white;">
+            <tr>
+                <th scope="col">Posição</th>
+                <th scope="col">Time</th>
+                <th scope="col">Pontos</th>
+                <th scope="col">Vitórias</th>
+                <th scope="col">Empates</th>
+                <th scope="col">Derrotas</th>
+                <th scope="col">Gols Pró</th>
+                <th scope="col">Gols Contra</th>
+                <th scope="col">Saldo de Gols</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                string rowColor;
+
+                if (i == 0)
+                {
+                    // Primeiro lugar - Ouro
+                    rowColor = "#fff8b5"; // Amarelo claro
+                }
+                else if (i == 1)
+                {
+                    // Segundo lugar - Prata azulada
+                    rowColor = "#b0c4de"; // LightSteelBlue
+                }
+                else if (i == 2)
+                {
+                    // Terceiro lugar - Bronze
+                    rowColor = "#cd7f32"; // Bronze
+                }
+                else
+                {
+                    // Restante - Branco
+                    rowColor = "#ffffff"; // Branco
+                }
+
+                <tr style="background-color: @rowColor; color: #013220;">
+                    <td>@(i + 1)º</td>
+                    <td>@Model[i].NomeTime</td>
+                    <td>@Model[i].Pontos</td>
+                    <td>@Model[i].Vitorias</td>
+                    <td>@Model[i].Empates</td>
+                    <td>@Model[i].Derrotas</td>
+                    <td>@Model[i].GolsPro</td>
+                    <td>@Model[i].GolsContra</td>
+                    <td>@Model[i].SaldoGols</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

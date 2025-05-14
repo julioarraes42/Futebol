@@ -1,0 +1,39 @@
+﻿@model Futebol.Models.Partida
+
+@{
+    ViewBag.Title = "Registrar Resultado";
+}
+
+<h2>Registrar Resultado</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.Id)
+
+    <div>
+        <label>@Model.TimeCasa.Nome</label>
+        @Html.EditorFor(m => m.GolsCasa)
+    </div>
+
+    <div>
+        <label>@Model.TimeFora.Nome</label>
+        @Html.EditorFor(m => m.GolsFora)
+    </div>
+
+    <hr />
+
+    <h3>Gols do @Model.TimeCasa.Nome</h3>
+    for (int i = 0; i < (Model.GolsCasa ?? 0); i++)
+    {
+        @Html.DropDownList("GolsCasa[" + i + "]", (SelectList)ViewBag.JogadoresCasa)
+    }
+
+    <h3>Gols do @Model.TimeFora.Nome</h3>
+    for (int i = 0; i < (Model.GolsFora ?? 0); i++)
+    {
+        @Html.DropDownList("GolsFora[" + i + "]", (SelectList)ViewBag.JogadoresFora)
+    }
+
+    <button type="submit" class="btn btn-primary">Salvar Resultado</button>
+}
+

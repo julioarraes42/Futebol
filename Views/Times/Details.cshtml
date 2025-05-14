@@ -1,0 +1,75 @@
+﻿@model Futebol.Models.Time
+
+@{
+    ViewBag.Title = "Detalhes do Time";
+}
+
+<h2 class="text-center mb-4 text-warning fw-bold">Detalhes do Time</h2>
+
+<div class="p-4 mb-5" style="background-color: #013220; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); color: white;">
+    <h3 class="text-center text-light">@Model.Nome</h3>
+    <hr class="border-light" />
+    <p><strong>Cidade:</strong> @Model.Cidade</p>
+    <p><strong>Estado:</strong> @Model.Estado</p>
+    <p><strong>Ano de Fundação:</strong> @Model.AnoFundacao</p>
+    <p><strong>Estádio:</strong> @Model.Estadio (@Model.CapacidadeEstadio pessoas)</p>
+    <p><strong>Uniforme:</strong> @Model.CorUniformePrimaria / @Model.CorUniformeSecundaria</p>
+</div>
+
+<h3 class="text-center text-warning">Jogadores</h3>
+<div class="table-responsive mb-5">
+    <table class="table table-bordered table-hover table-striped" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <thead style="background-color: #00cc66; color: white;">
+            <tr>
+                <th>Nome</th>
+                <th>Posição</th>
+                <th>Número</th>
+                <th>Altura (m)</th>
+                <th>Peso (kg)</th>
+                <th>Pé Preferido</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var jogador in Model.Jogadores)
+            {
+                <tr style="background-color: #f8f9fa; color: #001f3f;">
+                    <td>@jogador.Nome</td>
+                    <td>@jogador.Posicao</td>
+                    <td>@jogador.NumeroCamisa</td>
+                    <td>@jogador.Altura</td>
+                    <td>@jogador.Peso</td>
+                    <td>@jogador.PePreferido</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<h3 class="text-center text-warning">Comissão Técnica</h3>
+<div class="table-responsive mb-5">
+    <table class="table table-bordered table-hover table-striped" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <thead style="background-color: #00cc66; color: white;">
+            <tr>
+                <th>Nome</th>
+                <th>Cargo</th>
+                <th>Data de Nascimento</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var membro in Model.ComissaoTecnica)
+            {
+                <tr style="background-color: #f8f9fa; color: #001f3f;">
+                    <td>@membro.Nome</td>
+                    <td>@membro.Cargo</td>
+                    <td>@membro.DataNascimento.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="text-center">
+    @Html.ActionLink("Voltar para a lista", "Index", null, new { @class = "btn btn-warning btn-lg shadow-sm" })
+</div>
+
+

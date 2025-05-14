@@ -1,0 +1,32 @@
+﻿@model List<Futebol.Models.ClassificacaoViewModel>
+
+@{
+    ViewBag.Title = "Classificação";
+}
+
+<h2 class="text-center mb-4">Classificação Geral</h2>
+
+<div class="p-4 mb-5" style="background-color: #b8860b; border-radius: 10px;">
+    <!-- Amarelo escuro (goldenrod) -->
+    <div class="d-flex flex-column gap-4">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div class="card w-100 text-dark" style="background-color: #fffacd; border: 2px solid #ffff99;">
+                <!-- Amarelo claro -->
+                <div class="card-body">
+                    <h5 class="card-title text-center">@(i + 1)º - @Model[i].NomeTime</h5>
+                    <p class="card-text">
+                        <strong>Pontos:</strong> @Model[i].Pontos <br />
+                        <strong>Vitórias:</strong> @Model[i].Vitorias <br />
+                        <strong>Empates:</strong> @Model[i].Empates <br />
+                        <strong>Derrotas:</strong> @Model[i].Derrotas <br />
+                        <strong>Gols Marcados:</strong> @Model[i].GolsMarcados <br />
+                        <strong>Gols Sofridos:</strong> @Model[i].GolsSofridos <br />
+                        <strong>Saldo de Gols:</strong> @Model[i].SaldoGols <br />
+                        <strong>Aproveitamento:</strong> @Model[i].Aproveitamento.ToString("F1")%
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

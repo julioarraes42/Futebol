@@ -1,0 +1,33 @@
+﻿@model Futebol.Models.ComissaoTecnica
+
+@{
+    ViewBag.Title = "Detalhes do Membro da Comissão Técnica";
+}
+
+<h2 class="text-center mb-4 text-warning fw-bold">Detalhes do Membro da Comissão Técnica</h2>
+
+<div class="p-4 mb-5" style="background-color: #013220; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); color: white;">
+    <h3 class="text-center text-light">@Model.Nome</h3>
+    <hr class="border-light" />
+    <dl class="row">
+        <dt class="col-sm-4 text-light">Time</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Time.Nome)</dd>
+
+        <dt class="col-sm-4 text-light">Nome</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Nome)</dd>
+
+        <dt class="col-sm-4 text-light">Cargo</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Cargo)</dd>
+
+        <dt class="col-sm-4 text-light">Data de Nascimento</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.DataNascimento)</dd>
+    </dl>
+</div>
+
+<div class="text-center">
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-lg shadow-sm" })
+    @Html.ActionLink("Voltar à Lista", "Index", null, new { @class = "btn btn-warning btn-lg shadow-sm ms-3" })
+</div>
+
+
+

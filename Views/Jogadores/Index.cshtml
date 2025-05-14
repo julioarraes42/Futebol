@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Futebol.Models.Jogador>
+
+@{
+    ViewBag.Title = "Jogadores";
+}
+
+<h2 class="text-center mb-4 text-warning fw-bold">Jogadores</h2>
+
+<p class="text-center">
+    @Html.ActionLink("Criar Novo Jogador", "Create", null, new { @class = "btn btn-success btn-lg shadow-sm" })
+</p>
+
+@using (Html.BeginForm("Index", "Jogadores", FormMethod.Get))
+{
+    <div class="p-4 mb-4" style="background-color: #013220; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); color: white;">
+        <h4 class="text-light">Filtrar Jogadores</h4>
+        <div class="d-flex flex-wrap gap-3">
+            <div class="form-group">
+                @Html.Label("Nome", htmlAttributes: new { @class = "form-label text-light" })
+                @Html.TextBox("searchNome", Request.QueryString["searchNome"], new { @class = "form-control", placeholder = "Nome do jogador" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Posição", htmlAttributes: new { @class = "form-label text-light" })
+                @Html.DropDownList("searchPosicao",
+                    new SelectList(Enum.GetValues(typeof(Futebol.Models.Posicao))),
+                    "Todas",
+                    new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Pé Preferido", htmlAttributes: new { @class = "form-label text-light" })
+                @Html.DropDownList("searchPePreferido",
+                    new SelectList(Enum.GetValues(typeof(Futebol.Models.PePreferido))),
+                    "Todos",
+                    new { @class = "form-control" })
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg shadow-sm align-self-end">Buscar</button>
+        </div>
+    </div>
+}
+
+<div class="table-responsive mb-5">
+    <table class="table table-bordered table-hover table-striped" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <thead style="background-color: #00cc66; color: white;">
+            <tr>
+                <th>Time</th>
+                <th>@Html.DisplayNameFor(model => model.Nome)</th>
+                <th>@Html.DisplayNameFor(model => model.Posicao)</th>
+                <th>@Html.DisplayNameFor(model => model.NumeroCamisa)</th>
+                <th>@Html.DisplayNameFor(model => model.PePreferido)</th>
+                <th class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="background-color: #f8f9fa; color: #001f3f;">
+                    <td>@Html.DisplayFor(modelItem => item.Time.Nome)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Posicao)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NumeroCamisa)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PePreferido)</td>
+                    <td class="text-center">
+                        <div class="d-flex justify-content-center gap-2">
+                            @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+                            @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

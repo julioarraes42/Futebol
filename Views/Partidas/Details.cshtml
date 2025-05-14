@@ -1,0 +1,66 @@
+﻿@model Futebol.Models.Partida
+
+@{
+    ViewBag.Title = "Detalhes da Partida";
+}
+
+<h2 class="text-center mb-4 text-warning fw-bold">Detalhes da Partida</h2>
+
+<div class="p-4 mb-5" style="background-color: #013220; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); color: white;">
+    <h4 class="text-center text-light">Informações da Partida</h4>
+    <hr class="border-light" />
+    <dl class="row">
+
+        <dt class="col-sm-3">Time Casa</dt>
+        <dd class="col-sm-9">@Model.TimeCasa.Nome</dd>
+
+        <dt class="col-sm-3">Gols do Time Casa</dt>
+        <dd class="col-sm-9">@Model.GolsCasa</dd>
+
+        <dt class="col-sm-3">Time Visitante</dt>
+        <dd class="col-sm-9">@Model.TimeFora.Nome</dd>
+
+        <dt class="col-sm-3">Gols do Time Visitante</dt>
+        <dd class="col-sm-9">@Model.GolsFora</dd>
+
+        <dt class="col-sm-3">Data e Hora</dt>
+        <dd class="col-sm-9">@Model.Data.ToString("dd/MM/yyyy HH:mm")</dd>
+    </dl>
+</div>
+
+<h4 class="text-center text-warning">Gols da Partida</h4>
+<hr class="border-light" />
+
+@if (Model.Estatisticas != null && Model.Estatisticas.Any())
+{
+    <div class="table-responsive mb-5">
+        <table class="table table-bordered table-hover table-striped" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+            <thead style="background-color: #00cc66; color: white;">
+                <tr>
+                    <th>Jogador</th>
+                    <th>Time</th>
+                    <th>Gols Marcados</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var estatistica in Model.Estatisticas)
+                {
+                    <tr style="background-color: #f8f9fa; color: #001f3f;">
+                        <td>@estatistica.Jogador.Nome</td>
+                        <td>@estatistica.Jogador.Time.Nome</td>
+                        <td>@estatistica.Gols</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p class="text-center text-light"><i>Essa partida ainda não teve gols registrados.</i></p>
+}
+
+<div class="d-flex justify-content-center gap-3">
+    @Html.ActionLink("Voltar à Lista", "Index", null, new { @class = "btn btn-success btn-lg shadow-sm" })
+</div>
+

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Futebol.Models.Time>
+
+@{
+    ViewBag.Title = "Times";
+}
+
+<h2 class="text-center mb-4 text-warning fw-bold">Times</h2>
+
+<p class="text-center">
+    @Html.ActionLink("Criar Novo Time", "Create", null, new { @class = "btn btn-success btn-lg shadow-sm" })
+</p>
+
+<div class="table-responsive mb-5">
+    <table class="table table-bordered table-hover table-striped" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <thead style="background-color: #00cc66; color: white;">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Nome)</th>
+                <th>@Html.DisplayNameFor(model => model.Cidade)</th>
+                <th>@Html.DisplayNameFor(model => model.Estado)</th>
+                <th>@Html.DisplayNameFor(model => model.Estadio)</th>
+                <th>@Html.DisplayNameFor(model => model.AptoParaLiga)</th>
+                <th class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="background-color: #f8f9fa; color: #001f3f;">
+                    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Cidade)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Estadio)</td>
+                    <td>@Html.DisplayFor(modelItem => item.AptoParaLiga)</td>
+                    <td class="text-center">
+                        <div class="d-flex justify-content-center gap-2">
+                            @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+                            @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Liga Tabajara</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/flatly/bootstrap.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #343a40, #495057);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            color: #ffc107 !important;
+        }
+
+        .nav-link-custom {
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-right: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .liga-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .classificacao-btn {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .artilheiros-btn {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .default-btn {
+            background-color: #6c757d;
+            color: #ffc107;
+        }
+
+        .nav-link-custom:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: #343a40;
+            color: #ccc;
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+
+        .body-content {
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        hr {
+            border-top: 2px solid #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm shadow-sm mb-4">
+        <div class="container">
+            @Html.ActionLink("Liga Tabajara", "Index", "Home", new { area = "" }, new { @class = "navbar-brand fw-bold" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar a navegação" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-end">
+                <ul class="navbar-nav">
+                    <li>@Html.ActionLink("Liga", "Index", "Home", new { area = "" }, new { @class = "nav-link nav-link-custom liga-btn" })</li>
+                    <li>@Html.ActionLink("Classificação", "Classificacao", "Home", new { area = "" }, new { @class = "nav-link nav-link-custom classificacao-btn" })</li>
+                    <li>@Html.ActionLink("Artilheiros", "RankingArtilheiros", "Jogadores", new { area = "" }, new { @class = "nav-link nav-link-custom artilheiros-btn" })</li>
+                    <li>@Html.ActionLink("Partidas", "Index", "Partidas", new { area = "" }, new { @class = "nav-link nav-link-custom default-btn" })</li>
+                    <li>@Html.ActionLink("Times", "Index", "Times", new { area = "" }, new { @class = "nav-link nav-link-custom default-btn" })</li>
+                    <li>@Html.ActionLink("Jogadores", "Index", "Jogadores", new { area = "" }, new { @class = "nav-link nav-link-custom default-btn" })</li>
+                    <li>@Html.ActionLink("Funcionários", "Index", "ComissaoTecnica", new { area = "" }, new { @class = "nav-link nav-link-custom default-btn" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Liga Tabajara de Futebol</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

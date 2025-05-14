@@ -1,0 +1,64 @@
+﻿@model List<Futebol.Models.Time>
+
+@{
+    ViewBag.Title = "Liga Tabajara de Futebol";
+}
+
+<h1 class="text-center mb-4 text-warning fw-bold">Liga Tabajara de Futebol</h1>
+
+<h2 class="text-secondary">Status da Liga:</h2>
+@if (ViewBag.LigaApta)
+{
+    <span class="fw-bold text-success">Apta para iniciar o campeonato!</span>
+}
+else
+{
+    <span class="fw-bold text-danger">Não apta para iniciar o campeonato!</span>
+}
+
+<hr class="my-4" />
+
+<h2 class="mb-3 text-secondary">Times Participantes</h2>
+
+<div class="table-responsive mb-5">
+    <table class="table table-bordered table-hover table-striped" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <thead style="background-color: #00cc66; color: white;">
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Cidade</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Estádio</th>
+                <th scope="col" class="text-center">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var time in Model)
+            {
+                <tr style="background-color: #f8f9fa; color: #013220;">
+                    <td>@time.Nome</td>
+                    <td>@time.Cidade</td>
+                    <td>@time.Estado</td>
+                    <td>@time.Estadio</td>
+                    <td class="text-center">
+                        @Html.ActionLink("Ver detalhes", "Details", "Times", new { id = time.Id }, new { @class = "btn btn-outline-success btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="d-flex flex-column align-items-center gap-3">
+    @Html.ActionLink("Gerar novo Campeonato", "GerarPartidas", "Home", null, new { @class = "btn btn-success btn-lg shadow-sm" })
+
+    @if (TempData["Sucesso"] != null)
+    {
+        <div class="alert alert-success w-50 text-center shadow-sm">@TempData["Sucesso"]</div>
+    }
+    @if (TempData["Erro"] != null)
+    {
+        <div class="alert alert-danger w-50 text-center shadow-sm">@TempData["Erro"]</div>
+    }
+
+    @Html.ActionLink("Gerar Times Automaticamente", "PopularBancoDeDados", "Home", null, new { @class = "btn btn-warning btn-lg shadow-sm" })
+</div>

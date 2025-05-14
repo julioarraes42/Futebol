@@ -1,0 +1,84 @@
+﻿@model Futebol.Models.Jogador
+
+@{
+    ViewBag.Title = "Editar Jogador";
+}
+
+<h2 class="text-center mb-4 text-warning fw-bold">Editar Jogador</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="p-4 mb-5" style="background-color: #013220; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); color: white;">
+        <h4 class="text-center text-light">Informações do Jogador</h4>
+        <hr class="border-light" />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "form-label text-light" })
+            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.DataNascimento, htmlAttributes: new { @class = "form-label text-light" })
+            @Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Nacionalidade, htmlAttributes: new { @class = "form-label text-light" })
+            @Html.EditorFor(model => model.Nacionalidade, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nacionalidade, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Posicao, htmlAttributes: new { @class = "form-label text-light" })
+            @Html.EnumDropDownListFor(model => model.Posicao, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Posicao, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.NumeroCamisa, htmlAttributes: new { @class = "form-label text-light" })
+            @Html.EditorFor(model => model.NumeroCamisa, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NumeroCamisa, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Altura, htmlAttributes: new { @class = "form-label text-light" })
+            @Html.EditorFor(model => model.Altura, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Altura, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Peso, htmlAttributes: new { @class = "form-label text-light" })
+            @Html.EditorFor(model => model.Peso, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Peso, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.PePreferido, htmlAttributes: new { @class = "form-label text-light" })
+            @Html.EnumDropDownListFor(model => model.PePreferido, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.PePreferido, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.TimeId, "Time", htmlAttributes: new { @class = "form-label text-light" })
+            @Html.DropDownList("TimeId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TimeId, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="text-center">
+            <input type="submit" value="Salvar" class="btn btn-success btn-lg shadow-sm" />
+            @Html.ActionLink("Voltar à Lista", "Index", null, new { @class = "btn btn-warning btn-lg shadow-sm ms-3" })
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
